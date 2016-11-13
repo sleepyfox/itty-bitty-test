@@ -2,7 +2,7 @@
   "name": "itty-bitty-test",
   "version": "1.0.0",
   "description": "A teensy weensy test library, including a minimal test runner.",
-  "main": "index.js",
+  "main": "lib/test.js",
   "scripts": {
     "prepublish": "sibilant src/*.lisp -o lib",
     "test": "node lib/test-test.js",
@@ -16,6 +16,10 @@
     "name": "@sleepyfox",
     "email": "sleepyfox@gmail.com",
     "url": "https://github.com/sleepyfox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/npm.git"
   },
   "license": "MIT",
   "devDependencies": {
