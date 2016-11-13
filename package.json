@@ -1,0 +1,24 @@
+{
+  "name": "itty-bitty-test",
+  "version": "1.0.0",
+  "description": "A teensy weensy test library, including a minimal test runner.",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "sibilant src/*.lisp -o lib",
+    "test": "node lib/test-test.js",
+    "build": "sibilant src/*.lisp -o lib"
+  },
+  "keywords": [
+    "test"
+  ],
+  "engines": { "node": ">=10.0" },
+  "author": {
+    "name": "@sleepyfox",
+    "email": "sleepyfox@gmail.com",
+    "url": "https://github.com/sleepyfox"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "sibilant": "^0.5.5"
+  }
+}
