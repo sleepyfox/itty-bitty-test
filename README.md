@@ -50,5 +50,13 @@ You probably don't want to do this, because it was written in [Sibilant.js](http
 * Isn't written in idiomatic Lisp (any of them)
 * Goes against any of the design principles as stated at the top of this page
 
-As I said above, you probably don't want to do this...
+As I said above, you probably don't want to do this... but if you decide to anyway, build the JS from `./src` to `./lib` with:
+
+    npm run build
+
+and run the tests against the now built JS with:
+
+    npm test
+
+Bon appetite!
 
