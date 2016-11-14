@@ -12,9 +12,9 @@ A teensy weensy test library for Node.js with a tiny test-runner too.
     
 ## Examples of use
 Itty-bitty-test exposes three functions to help you write tests:
-* suite - acts as a wrapper for tests. Doesn't currently nest
-* it - is a test. Has a name and a callback with no parameters (a 'thunk'). Registers the test without actually running it.
-* reporter - runs the tests and reports their results
+* `describe` - acts as a wrapper for tests. Doesn't currently nest. Also has a synonym: `context`.
+* `it` - is a test. Has a name and a callback with no parameters (a 'thunk'). Registers the test without actually running it.
+* `reporter` - runs the tests and reports their results
 
 A simple test suite might look like the following (ES5):
 
