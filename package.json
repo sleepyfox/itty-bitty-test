@@ -1,6 +1,6 @@
 {
   "name": "itty-bitty-test",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A teensy weensy test library, including a minimal test runner.",
   "main": "lib/test.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "keywords": [
     "test"
   ],
-  "engines": { "node": ">=10.0" },
+  "engines": { "node": ">=4.0" },
   "author": {
     "name": "@sleepyfox",
     "email": "sleepyfox@gmail.com",

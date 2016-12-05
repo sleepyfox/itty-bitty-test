@@ -2,52 +2,51 @@
 (var FAIL "\033[31m\u2718\033[0m")
 
 (var current-context "")
-(var test-list [])
+(var result-list [])
 
+;; [ "SUITE", "A test suite", [...]]
 (def describe (name func)
+     ;; TODO: this should create a suite list
      (assign current-context name)
      (func)
      (assign current-context ""))
 
+;; [ "RESULT", "my first test", true, null]
+;; Runs the test and adds the result to the result-list
 (def fixture (name func)
-     (assign test-list (append test-list {
-                               name: name
-                               func: func
-                               context: current-context })))
+     (var res (try
+                (do
+                  (func)
+                  (make-result name current-context))
+                (make-failed-result name current-context e)))
+     (.push result-list res))
 
-(def make-result (test)
-     { context: test.context
-       name: test.name
+(def make-result (name context)
+     { context: context
+       name: name
        passed: true
        message: "" })
 
-(def make-failed-result (test err) {
-     context: test.context
-     name: test.name
+(def make-failed-result (name context err) {
+     context: context
+     name: name
      passed: false
      message: (+ " FAILED: '" err.message
                  "', expected: " err.expected
                  ", got: " err.actual)
      })
 
-(def run-tests (tests)
-     (tests.map (# (t)
-                   (try (do
-                          (t.func)
-                          (make-result t))
-                        (make-failed-result t e)))))
-
-(def report-results (results)
-     (each r results
+(def reporter (printer)
+     (each r result-list
            (ternary r.passed
-                    (console.log OK r.context '- r.name)
-                    (console.log FAIL r.context '- r.name "\n" r.message))))
-
-(def reporter ()
-     (report-results (run-tests test-list)))
+                    (printer OK r.context '- r.name)
+                    (printer FAIL r.context '- r.name "\n" r.message))))
 
 (set module 'exports {
      reporter: reporter
      it: fixture
      describe: describe
-     context: describe })
+     context: describe
+     _result-list: result-list
+     _make-result: make-result
+     _make-failed-result: make-failed-result })

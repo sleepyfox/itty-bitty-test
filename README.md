@@ -12,8 +12,8 @@ A teensy weensy test library for Node.js with a tiny test-runner too.
     
 ## Examples of use
 Itty-bitty-test exposes three functions to help you write tests:
-* `describe` - acts as a wrapper for tests. Doesn't currently nest. Also has a synonym: `context`.
-* `it` - is a test. Has a name and a callback with no parameters (a 'thunk'). Registers the test without actually running it.
+* `describe` - A wrapper for tests (doesn't currently nest). Has a synonym: `context`. Has two parameters: a name, and a callback with no parameters (a 'thunk') that includes the tests.
+* `it` - is a test. Has a name and a thunk that includes the assertions.
 * `reporter` - runs the tests and reports their results
 
 A simple test suite might look like the following (ES5):
@@ -58,5 +58,37 @@ and run the tests against the now built JS with:
 
     npm test
 
-Bon appetite!
+### Internal structure
+A test is a function with a name. When a test is run it fails if it generates an exception (this is the behaviour of the built-in `assert` class) otherwise it succeeds. The result is stored in a results list.
 
+A test result is a list: 
+1. String: "RESULT"
+2. String: the name of the test
+3. Boolean: Whether the test was successful
+4. String: the failure message
+
+Example test result:
+
+    [ "RESULT", "my first test", true, null]
+
+A test suite result is a list:
+1. String "SUITE"
+2. String: the name of the suite
+3. List: either test results or suites
+
+Example suite result:
+
+    [ "SUITE", "A test suite", [...]]
+
+
+### Question: whether to use built-in assertions or to use own?
+Assertions generate an error object that looks like:
+```json
+{ 
+  actual: false,
+  expected: true,
+  operator: '==',
+  message: 'false == true',
+  generatedMessage: true
+}
+```
